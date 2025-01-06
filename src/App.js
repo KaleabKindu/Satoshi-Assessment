@@ -1,19 +1,20 @@
 import React from 'react';
-import { Button, TextField } from '@mui/material';
+import Home from './pages/Home';
+import Products from './pages/Products';
+import Layout from './components/Layout';
+import {
+  Routes,
+  Route,
+} from "react-router-dom";
 
 function App() {
   return (
-  <div className='flex flex-col gap-10 items-center mt-72 w-full'>
-    <p className='font-bold text-3xl'>Hello, React with Webpack!</p>
-      <TextField 
-        id="outlined-basic" 
-        label="Outlined" 
-        variant="outlined" 
-      />
-      <Button variant="contained" color="primary">
-        Hello, MUI!
-      </Button>
-  </div>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/products" element={<Products/>}/>
+      </Routes>
+    </Layout>
   );
 }
 
