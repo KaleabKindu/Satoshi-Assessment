@@ -3,6 +3,7 @@ import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import FavoriteProjects from "./FavoriteProjects";
 
 const MobileDrawer = (props) => {
   const [open, setOpen] = useState(false);
@@ -20,7 +21,7 @@ const MobileDrawer = (props) => {
               <CloseIcon />
             </IconButton>
           </div>
-          <p>Mobile Drawer</p>
+          <FavoriteProjects/>
         </div>
       </Drawer>
     </div>
