@@ -1,19 +1,19 @@
 import React, { useContext, useMemo } from "react";
-import { ProductsContext } from "../context/ProductsContext";
+import { ProjectsContext } from "../context/ProjectsContext";
 
 const FavoriteProjects = () => {
-  const { products } = useContext(ProductsContext);
-  const favouriteProducts = useMemo(
-    () => products.filter((product) => product.favourite),
-    [products]
+  const { projects } = useContext(ProjectsContext);
+  const favouriteProjects = useMemo(
+    () => projects.filter((project) => project.favourite),
+    [projects]
   );
   return (
     <div className="flex flex-col gap-2">
       <p>Favorite Projects</p>
       <ul className="flex flex-col gap-1 pl-2">
-        {favouriteProducts.map((product) => (
-          <li key={product.id} className="list-disc list-inside">
-            {product.name}
+        {favouriteProjects.map((project) => (
+          <li key={project.id} className="list-disc list-inside">
+            {project.name}
           </li>
         ))}
       </ul>

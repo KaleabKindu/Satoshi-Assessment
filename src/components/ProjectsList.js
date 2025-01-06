@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { ProductsContext } from "../context/ProductsContext";
+import { ProjectsContext } from "../context/ProjectsContext";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,9 +9,9 @@ import TableRow from "@mui/material/TableRow";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router";
 
-const ProductsList = () => {
+const ProjectsList = () => {
   const navigate = useNavigate();
-  const { products } = useContext(ProductsContext);
+  const { projects } = useContext(ProjectsContext);
   const columns = [
     { id: "id", label: "Project ID", minWidth: 100 },
     { id: "name", label: "Project Name", minWidth: 170 },
@@ -57,15 +57,15 @@ const ProductsList = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {products.map((product) => {
+          {projects.map((project) => {
             return (
               <TableRow
                 hover
-                key={product.id}
+                key={project.id}
                 sx={{ backgroundColor: "rgb(241, 241, 241)" }}
               >
                 {columns.map((column) => {
-                  const value = product[column.id];
+                  const value = project[column.id];
                   return (
                     value && (
                       <TableCell
@@ -85,7 +85,7 @@ const ProductsList = () => {
                 >
                   <Button
                     className="bg-blue-500"
-                    onClick={() => navigate(`/${product.id}`)}
+                    onClick={() => navigate(`/${project.id}`)}
                     sx={{
                       paddingY: "2px",
                       backgroundColor: "rgb(59 130 246)",
@@ -104,4 +104,4 @@ const ProductsList = () => {
   );
 };
 
-export default ProductsList;
+export default ProjectsList;

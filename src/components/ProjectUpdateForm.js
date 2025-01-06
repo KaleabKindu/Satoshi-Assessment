@@ -5,7 +5,7 @@ import { TextField } from "@mui/material";
 import { FormError, FormLabel } from "./FormElements";
 import { Button } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
-import { ProductsContext } from "../context/ProductsContext";
+import { ProjectsContext } from "../context/ProjectsContext";
 const formSchema = object({
   name: string()
     .min(3, "project name must be atleast 3 characters long")
@@ -26,32 +26,32 @@ const formSchema = object({
   manager: string().required("project manager is required"),
 });
 
-const ProductUpdateForm = (props) => {
-  const { products, updateProduct } = useContext(ProductsContext);
+const ProjectUpdateForm = (props) => {
+  const { projects, updateProject } = useContext(ProjectsContext);
   const { id } = useParams();
   const navigate = useNavigate();
-  const product = useMemo(
-    () => products.find((product) => product.id === id),
-    [products]
+  const project = useMemo(
+    () => projects.find((project) => project.id === id),
+    [projects]
   );
   const { values, handleChange, handleBlur, errors, touched, handleSubmit } =
     useFormik({
       initialValues: {
-        name: product?.name,
-        description: product?.description,
-        start_date: product?.start_date,
-        end_date: product?.end_date,
-        manager: product?.manager,
+        name: project?.name,
+        description: project?.description,
+        start_date: project?.start_date,
+        end_date: project?.end_date,
+        manager: project?.manager,
       },
       validationSchema: formSchema,
       onSubmit: async (values) => {
-        updateProduct(id, { ...values });
+        updateProject(id, { ...values });
         navigate("/");
       },
     });
   useEffect(() => {
-    !product && navigate("/")
-  }, [product])
+    !project && navigate("/")
+  }, [project])
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex flex-col gap-5">
@@ -165,4 +165,4 @@ const ProductUpdateForm = (props) => {
   );
 };
 
-export default ProductUpdateForm;
+export default ProjectUpdateForm;
