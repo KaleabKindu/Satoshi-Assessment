@@ -1,11 +1,12 @@
-import React, { useContext, useEffect, useMemo } from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import { object, string } from "yup";
 import { TextField } from "@mui/material";
 import { FormError, FormLabel } from "./FormElements";
 import { Button } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
-import { ProjectsContext } from "../context/ProjectsContext";
+import CircularProgress from "@mui/material/CircularProgress";
+
 const formSchema = object({
   name: string()
     .min(3, "project name must be atleast 3 characters long")
@@ -26,14 +27,9 @@ const formSchema = object({
   manager: string().required("project manager is required"),
 });
 
-const ProjectUpdateForm = (props) => {
-  const { projects, updateProject } = useContext(ProjectsContext);
-  const { id } = useParams();
+const ProjectUpdateForm = ({ project }) => {
   const navigate = useNavigate();
-  const project = useMemo(
-    () => projects.find((project) => project.id === id),
-    [projects]
-  );
+  const [loading, setLoading] = useState(false);
   const { values, handleChange, handleBlur, errors, touched, handleSubmit } =
     useFormik({
       initialValues: {
@@ -45,16 +41,29 @@ const ProjectUpdateForm = (props) => {
       },
       validationSchema: formSchema,
       onSubmit: async (values) => {
-        updateProject(id, { ...values });
-        navigate("/");
+        setLoading(true);
+        fetch(`http://localhost:3000/api/projects/${project.id}`, {
+          method: "PUT",
+          body: JSON.stringify(values),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            navigate("/");
+          })
+          .finally(() => {
+            setLoading(false);
+          });
       },
     });
-  useEffect(() => {
-    !project && navigate("/")
-  }, [project])
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex flex-col gap-5">
+      <div className="flex flex-wrap items-center gap-2 md:gap-5">
+          <FormLabel className="w-36" error={touched.name && !!errors.name}>
+            Project ID
+          </FormLabel>
+          <p>{project.id}</p>
+        </div>
         <div className="flex flex-wrap items-center gap-2 md:gap-5">
           <FormLabel className="w-36" error={touched.name && !!errors.name}>
             Project Name
@@ -159,7 +168,27 @@ const ProjectUpdateForm = (props) => {
             {errors.manager}
           </FormError>
         </div>
-        <Button type="submit">Update</Button>
+        <Button
+          type="submit"
+          className="bg-blue-500"
+          disabled={loading}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            width: "100px",
+            paddingY: "4px",
+            borderRadius: "0px",
+            marginLeft: { xs: "0px", md: "10.5rem" },
+            backgroundColor: "rgb(59 130 246)",
+            color: "white",
+          }}
+        >
+          {loading ? (
+            <CircularProgress sx={{ color: "white" }} size={30} />
+          ) : (
+            "Update"
+          )}
+        </Button>
       </div>
     </form>
   );

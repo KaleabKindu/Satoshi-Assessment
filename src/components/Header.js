@@ -7,7 +7,7 @@ const Header = () => {
   console.log("id", id);
   return (
     <div className="flex justify-between">
-      <p>{id ? "Product Detail Page" : "Product List Page"}</p>
+      <p>{id ? "Project Detail Page" : "Project List Page"}</p>
       <MobileDrawer />
     </div>
   );

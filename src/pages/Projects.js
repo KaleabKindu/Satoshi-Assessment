@@ -1,8 +1,8 @@
 import React from "react";
-import ProductsList from "../components/ProjectsList";
+import ProjectsList from "../components/ProjectsList";
 import { withRootLayout } from "../hoc/withRootLayout";
-const Products = () => {
-  return <ProductsList />;
+const Projects = () => {
+  return <ProjectsList />;
 };
 
-export default withRootLayout(Products);
+export default withRootLayout(Projects);
