@@ -1,13 +1,13 @@
-import React from 'react'
-import MobileDrawer from './MobileDrawer'
+import React from "react";
+import MobileDrawer from "./MobileDrawer";
 
 const Header = () => {
   return (
-    <div className='flex justify-between'>
+    <div className="flex justify-between">
       <p>Header</p>
-      <MobileDrawer/>
+      <MobileDrawer />
     </div>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
