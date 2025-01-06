@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 const FavoriteProjects = () => {
   const [projects, setProjects] = useState([]);
   useEffect(() => {
+    // Fetch the list of projects from the API
     fetch("http://localhost:3000/api/projects")
-      .then((res) => res.json())
+      .then((res) => res.json()) // Parse the JSON response
       .then((data) => {
-        console.log("data", data);
-        setProjects(data.filter((project) => project.favourite));
+      // Filter the projects to only include the favorite ones and update the state
+      setProjects(data.filter((project) => project.favourite));
       });
   }, []);
   return (

@@ -7,6 +7,7 @@ import { Button } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 
+// Define the validation schema using Yup
 const formSchema = object({
   name: string()
     .min(3, "project name must be atleast 3 characters long")
@@ -30,6 +31,8 @@ const formSchema = object({
 const ProjectUpdateForm = ({ project }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+
+  // Initialize formik with initial values, validation schema, and submit handler
   const { values, handleChange, handleBlur, errors, touched, handleSubmit } =
     useFormik({
       initialValues: {
@@ -55,10 +58,11 @@ const ProjectUpdateForm = ({ project }) => {
           });
       },
     });
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex flex-col gap-5">
-      <div className="flex flex-wrap items-center gap-2 md:gap-5">
+        <div className="flex flex-wrap items-center gap-2 md:gap-5">
           <FormLabel className="w-36" error={touched.name && !!errors.name}>
             Project ID
           </FormLabel>

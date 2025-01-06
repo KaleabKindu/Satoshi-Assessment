@@ -11,9 +11,11 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { Box } from "@mui/material";
 
 const ProjectsList = () => {
-  const navigate = useNavigate();
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate(); // Hook to navigate programmatically
+  const [projects, setProjects] = useState([]); // State to store projects data
+  const [loading, setLoading] = useState(false); // State to manage loading state
+
+  // Define table columns
   const columns = [
     { id: "id", label: "Project ID", minWidth: 100 },
     { id: "name", label: "Project Name", minWidth: 170 },
@@ -41,21 +43,24 @@ const ProjectsList = () => {
       minWidth: 100,
     },
   ];
+
+  // Fetch projects data from API on component mount
   useEffect(() => {
-    setLoading(true);
+    setLoading(true); // Set loading to true before fetching data
     fetch("http://localhost:3000/api/projects")
       .then((res) => res.json())
       .then((data) => {
-        console.log("data", data);
-        setProjects(data);
+        setProjects(data); // Update projects state with fetched data
       })
       .finally(() => {
-        setLoading(false);
+        setLoading(false); // Set loading to false after fetching data
       });
   }, []);
+
   return (
     <>
       {loading ? (
+        // Show loading spinner while data is being fetched
         <Box
           sx={{
             display: "flex",
@@ -67,6 +72,7 @@ const ProjectsList = () => {
           <CircularProgress />
         </Box>
       ) : (
+        // Display table with projects data
         <TableContainer>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
@@ -112,7 +118,7 @@ const ProjectsList = () => {
                     >
                       <Button
                         className="bg-blue-500"
-                        onClick={() => navigate(`/${project.id}`)}
+                        onClick={() => navigate(`/${project.id}`)} // Navigate to project edit page
                         sx={{
                           paddingY: "2px",
                           borderRadius: "0px",
