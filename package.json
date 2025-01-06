@@ -18,6 +18,7 @@
     "autoprefixer": "^10.4.20",
     "babel-loader": "^9.2.1",
     "css-loader": "^7.1.2",
+    "formik": "^2.4.6",
     "html-webpack-plugin": "^5.6.3",
     "postcss": "^8.4.49",
     "postcss-loader": "^8.1.1",
@@ -27,6 +28,12 @@
     "tailwindcss": "^3.4.17",
     "webpack": "^5.97.1",
     "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^5.2.0"
+    "webpack-dev-server": "^5.2.0",
+    "yup": "^1.6.1"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^6.3.1"
   }
 }
