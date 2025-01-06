@@ -1,8 +1,10 @@
 import React from "react";
 import { withRootLayout } from "../hoc/withRootLayout";
+import ProductUpdateForm from "../components/ProductUpdateForm";
+
 
 const ProductDetail = () => {
-  return <div>ProductDetail</div>;
+  return <ProductUpdateForm/>;
 };
 
 export default withRootLayout(ProductDetail);
